@@ -1,5 +1,31 @@
-Coding challenge: Simple Blog Application
------------------------------------------
+# Coding challenge: Simple Blog Application
+
+## Creator
+
+Created by [Peter Bakonyi](https://github.com/peterbakonyi05)
+
+
+## Tech stack
+
+- NX monorepo
+- Service: [NestJS](https://nestjs.com/) application
+- Client: [Next.js](https://nextjs.org/) application
+    - TypeScript
+    - UI library: chakra-ui
+    - Data fetching: react-query
+    - Unit testing: Jest
+- E2E tests: playwright
+
+## Getting started
+
+- Use Node.js v18, which is the current LTS (built and tested with v18.16.0)
+- Use npm v9 (built and tested with v9.5.1)
+
+```sh
+npm install # install dependencies
+```
+
+
 
 ## Notes
 
