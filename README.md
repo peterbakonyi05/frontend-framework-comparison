@@ -23,8 +23,22 @@ Created by [Peter Bakonyi](https://github.com/peterbakonyi05)
 
 ```sh
 npm install # install dependencies
+npm run start:blog-service # start blog server
 ```
 
+Example request to login:
+```sh
+curl -X POST -H "Content-Type: application/json" -d '{"email":"robert.reactfan@gmail.com","password":"react"}' http://localhost:3000/api/auth/login
+```
+
+Example request to get profile info:
+```sh
+ curl http://localhost:3000/api/auth/profile -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoicm9iZXJ0LnJlYWN0ZmFuQGdtYWlsLmNvbSIsImlhdCI6MTY4Njg1NTIwOSwiZXhwIjoxNjg2ODU4ODA5fQ.ptuJM21aVuuvvyrRil6vpGlwbs250CrttJoNnP-Zprg"
+```
+
+## TODOs for blog service
+- testing
+- logging
 
 
 ## Notes

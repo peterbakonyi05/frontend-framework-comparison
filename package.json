@@ -2,14 +2,20 @@
   "name": "@tbcc/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "start:blog-service": "nx run blog-service:serve",
+    "test": "nx run-many --target=test"
+  },
   "private": true,
   "dependencies": {
     "@nestjs/common": "^9.1.1",
     "@nestjs/core": "^9.1.1",
+    "@nestjs/jwt": "^10.1.0",
     "@nestjs/platform-express": "^9.1.1",
     "@nx/nest": "16.3.2",
     "axios": "^1.0.0",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.0",
     "tslib": "^2.3.0"
@@ -34,6 +40,7 @@
     "jest-environment-node": "^29.4.1",
     "nx": "16.3.2",
     "prettier": "^2.6.2",
+    "supertest": "^6.3.3",
     "ts-jest": "^29.1.0",
     "ts-node": "10.9.1",
     "typescript": "~5.0.2"
