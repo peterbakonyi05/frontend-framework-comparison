@@ -1,5 +1,7 @@
 # Coding challenge: Simple Blog Application
 
+## Work in progress
+
 ## Creator
 
 Created by [Peter Bakonyi](https://github.com/peterbakonyi05)
