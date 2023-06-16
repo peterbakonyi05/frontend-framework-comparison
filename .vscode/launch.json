@@ -9,6 +9,12 @@
       "name": "Debug tests",
       "request": "launch",
       "type": "node-terminal"
+    },
+    {
+      "command": "npm run start:blog-service",
+      "name": "Debug blog service",
+      "request": "launch",
+      "type": "node-terminal"
     }
   ]
 }

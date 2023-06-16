@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AuthController } from './auth.controller';
 import { AuthModule } from './auth.module';
-import { JWTUser } from './auth.model';
+import { testingUtil } from '../testing/testing.util';
 
 describe('AuthController', () => {
   let controller: AuthController;
@@ -37,13 +37,8 @@ describe('AuthController', () => {
 
   describe('profile', () => {
     it('should return the user profile when a valid JWT token is present in the headers', async () => {
-      const jwtUser: JWTUser = {
-        sub: 2,
-        email: 'adam.angularadvocate@gmail.com',
-        iat: 1686855209,
-        exp: 1686858809,
-      };
-      const profile = await controller.getProfile({ user: jwtUser });
+      const request = testingUtil.createRequestWithUser();
+      const profile = await controller.getProfile(request);
       expect(profile).toEqual({
         id: 2,
         email: 'adam.angularadvocate@gmail.com',
@@ -57,13 +52,11 @@ describe('AuthController', () => {
     });
 
     it('should return undefined when an invalid user is present', async () => {
-      const jwtUser: JWTUser = {
-        sub: 1000,
-        email: 'doesnotexist@gamil.com',
-        iat: 1686855209,
-        exp: 1686858809,
-      };
-      const profile = await controller.getProfile({ user: jwtUser });
+      const request = testingUtil.createRequestWithUser(
+        1000,
+        'doesnotexist@gamil.com'
+      );
+      const profile = await controller.getProfile(request);
       expect(profile).toEqual(undefined);
     });
   });

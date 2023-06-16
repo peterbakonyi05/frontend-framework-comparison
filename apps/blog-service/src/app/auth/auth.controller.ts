@@ -29,7 +29,7 @@ export class AuthController {
   @UseGuards(AuthGuard)
   @Get('profile')
   getProfile(@Request() req) {
-    const a: JWTUser | undefined = req.user;
-    return a ? this.userService.findOneById(a.sub) : undefined;
+    const user: JWTUser = req.user;
+    return this.userService.findOneById(user?.sub);
   }
 }
