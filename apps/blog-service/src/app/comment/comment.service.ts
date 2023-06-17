@@ -3,7 +3,7 @@ import {
   NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
-import { Comment } from './comment.model';
+import type { Comment } from '@tbcc/models';
 import { COMMENTS } from './comment.mock';
 import { UserService } from '../user/user.service';
 import { PostService } from '../post/post.service';

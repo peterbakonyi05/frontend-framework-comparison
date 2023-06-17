@@ -1,6 +1,6 @@
 import { Controller, Get, Param } from '@nestjs/common';
 import { PostService } from './post.service';
-import { Post } from './post.model';
+import type { Post } from '@tbcc/models';
 
 @Controller('posts')
 export class PostController {

@@ -8,8 +8,9 @@ import {
   Param,
   UseGuards,
 } from '@nestjs/common';
+import type { Comment } from '@tbcc/models';
 import { CommentService } from './comment.service';
-import { Comment, CreateCommentDTO } from './comment.model';
+import { CreateCommentDTO } from './comment.model';
 import { AuthGuard } from '../auth/auth.guard';
 import { JWTUser } from '../auth/auth.model';
 

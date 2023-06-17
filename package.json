@@ -4,6 +4,7 @@
   "license": "MIT",
   "scripts": {
     "start:blog-service": "nx run blog-service:serve",
+    "start:blog-web": "nx run blog-web:serve",
     "test": "nx run-many --target=test"
   },
   "private": true,

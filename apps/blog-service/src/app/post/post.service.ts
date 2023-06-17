@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { Post } from './post.model';
+import type { Post } from '@tbcc/models';
+
 import { POSTS } from './post.mock';
 
 @Injectable()

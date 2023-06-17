@@ -1,4 +1,4 @@
-import { Comment } from './comment.model';
+import type { Comment } from '@tbcc/models';
 
 export const COMMENTS: Comment[] = [
   {

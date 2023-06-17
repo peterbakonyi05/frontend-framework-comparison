@@ -1,0 +1,22 @@
+.post {
+  border: 1px solid #ccc;
+  padding: 16px;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.content {
+  margin-top: 8px;
+}
+
+.createdAt {
+  color: #666;
+  margin-top: 8px;
+  font-size: 12px;
+}
