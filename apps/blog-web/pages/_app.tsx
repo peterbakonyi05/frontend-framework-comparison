@@ -17,12 +17,18 @@ const METADATA = {
 };
 
 const queryClient = new QueryClient();
-const { Button, Modal, Heading } = chakraTheme.components;
+const { Alert, Button, Modal, Heading, Form, FormLabel, FormError, Input  } =
+  chakraTheme.components;
 const theme = extendBaseTheme({
   components: {
+    Alert,
     Heading,
     Button,
     Modal,
+    Form,
+    FormLabel,
+    FormError,
+    Input,
   },
 });
 

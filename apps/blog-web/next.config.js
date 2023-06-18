@@ -12,6 +12,16 @@ const nextConfig = {
     // See: https://github.com/gregberge/svgr
     svgr: false,
   },
+  async rewrites() {
+    // this is needed so that the cookie can be set on the same domain
+    // in a production app the api should be under a subdomain or same domain to avod rewrites
+    return [
+      {
+        source: '/api/:path*',
+        destination: `${process.env['NX_BLOG_API_BASE_URL']}/api/:path*`, // The :path parameter is used here so will not be automatically passed in the query
+      },
+    ];
+  },
 };
 
 const plugins = [

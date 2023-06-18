@@ -1,14 +1,20 @@
-const API_BASE_URL = process.env['NX_BLOG_API_BASE_URL'];
+const API_BASE_URL = process.env.NX_BLOG_API_BASE_URL;
 
-const getUrl = (path: string): string => new URL(path, API_BASE_URL).toString();
+const getUrl = (path: string): string =>
+  API_BASE_URL ? new URL(path, API_BASE_URL).toString() : path;
 
 export const apiClient = {
+  async get(path: string): Promise<Response> {
+    const url = getUrl(path);
+    return await fetch(url);
+  },
+
   async getData<T>(path: string): Promise<T> {
-    const response = await fetch(getUrl(path));
+    const response = await apiClient.get(path);
     return response.json();
   },
 
-  async post<T>(path: string, body?: unknown): Promise<T> {
+  async post(path: string, body?: unknown): Promise<Response> {
     const response = await fetch(getUrl(path), {
       method: 'POST',
       headers: {
@@ -16,6 +22,6 @@ export const apiClient = {
       },
       body: typeof body !== 'undefined' ? JSON.stringify(body) : undefined,
     });
-    return response.json();
+    return response;
   },
 };

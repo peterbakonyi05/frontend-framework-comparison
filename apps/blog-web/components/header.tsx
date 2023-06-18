@@ -1,16 +1,33 @@
 import React from 'react';
 import styles from './header.module.css';
 import Link from 'next/link';
-import { Box, Heading } from '@chakra-ui/react';
+import { HStack, Heading, Skeleton } from '@chakra-ui/react';
+import { useAuth } from '../lib/auth/auth.hook';
+import { LoginButton } from './login-button';
+import { LogoutButton } from './logout-button';
 
 export const Header = () => {
+  const { isLoading, isAuthenticated } = useAuth();
   return (
-    <Box as="header" p={4} backgroundColor={'gray.700'} color='white'>
+    <HStack
+      as="header"
+      p={4}
+      backgroundColor={'gray.700'}
+      color="white"
+      justifyContent="space-between"
+    >
       <Link href="/">
         <Heading size="lg" as="h1" className={styles.title}>
           Frontend Frameworks
         </Heading>
       </Link>
-    </Box>
+      {isLoading ? (
+        <Skeleton w={16} h={4} />
+      ) : isAuthenticated ? (
+        <LogoutButton />
+      ) : (
+        <LoginButton />
+      )}
+    </HStack>
   );
 };
