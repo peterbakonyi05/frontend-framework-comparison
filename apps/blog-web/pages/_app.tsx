@@ -1,4 +1,7 @@
 import { AppProps } from 'next/app';
+import { ChakraBaseProvider, extendBaseTheme } from '@chakra-ui/react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import chakraTheme from '@chakra-ui/theme';
 import Head from 'next/head';
 
 import './global.css';
@@ -6,7 +9,6 @@ import styles from './app.module.css';
 
 import { Footer } from '../components/footer';
 import { Header } from '../components/header';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AuthProvider } from '../lib/auth/auth.provider';
 
 const METADATA = {
@@ -15,21 +17,31 @@ const METADATA = {
 };
 
 const queryClient = new QueryClient();
+const { Button, Modal, Heading } = chakraTheme.components;
+const theme = extendBaseTheme({
+  components: {
+    Heading,
+    Button,
+    Modal,
+  },
+});
 
 const CustomApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   return (
     <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <Head>
-          <title>{METADATA.title}</title>
-          <meta name="description" content={METADATA.description} />
-        </Head>
-        <div className={styles.root}>
-          <Header />
-          <div className={styles.content}>{<Component {...pageProps} />}</div>
-          <Footer />
-        </div>
-      </AuthProvider>
+      <ChakraBaseProvider theme={theme}>
+        <AuthProvider>
+          <Head>
+            <title>{METADATA.title}</title>
+            <meta name="description" content={METADATA.description} />
+          </Head>
+          <div className={styles.root}>
+            <Header />
+            <div className={styles.content}>{<Component {...pageProps} />}</div>
+            <Footer />
+          </div>
+        </AuthProvider>
+      </ChakraBaseProvider>
     </QueryClientProvider>
   );
 };
