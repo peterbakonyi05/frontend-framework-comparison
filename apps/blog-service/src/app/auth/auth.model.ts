@@ -1,6 +1,7 @@
+import type { LoginRequest } from '@tbcc/models';
 import { IsEmail, IsNotEmpty } from 'class-validator';
 
-export class SignInDTO {
+export class SignInDTO implements LoginRequest {
   @IsEmail()
   email: string;
 

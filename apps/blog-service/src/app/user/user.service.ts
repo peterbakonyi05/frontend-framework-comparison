@@ -1,5 +1,5 @@
+import type { User } from '@tbcc/models';
 import { Injectable } from '@nestjs/common';
-import { User } from './user.model';
 import { USERS, USER_CREDENTIALS } from './user.mock';
 
 @Injectable()

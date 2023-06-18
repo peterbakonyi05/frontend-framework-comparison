@@ -14,7 +14,7 @@ export class AuthService {
     private jwtService: JwtService
   ) {}
 
-  async signIn(
+  async login(
     email: string,
     password: string
   ): Promise<SignInResponse | undefined> {

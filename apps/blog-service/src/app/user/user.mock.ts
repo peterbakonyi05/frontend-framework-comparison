@@ -1,4 +1,5 @@
-import { User, UserCredentials } from './user.model';
+import type { User } from '@tbcc/models';
+import { UserCredentials } from './user.model';
 
 export const USERS: User[] = [
   {
