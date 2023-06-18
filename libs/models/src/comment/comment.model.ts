@@ -7,3 +7,8 @@ export interface Comment {
   updatedAt: string;
   content: string;
 }
+
+export interface CreateCommentRequest {
+  postId: number;
+  content: string;
+}

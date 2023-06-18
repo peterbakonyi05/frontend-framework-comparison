@@ -28,6 +28,7 @@ const {
   FormLabel,
   FormError,
   Input,
+  Textarea,
 } = chakraTheme.components;
 const theme = extendBaseTheme({
   components: {
@@ -41,6 +42,7 @@ const theme = extendBaseTheme({
     FormLabel,
     FormError,
     Input,
+    Textarea,
   },
 });
 
