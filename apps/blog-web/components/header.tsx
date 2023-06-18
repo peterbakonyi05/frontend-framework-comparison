@@ -1,5 +1,4 @@
 import React from 'react';
-import styles from './header.module.css';
 import Link from 'next/link';
 import { HStack, Heading, Skeleton } from '@chakra-ui/react';
 import { useAuth } from '../lib/auth/auth.hook';
@@ -17,7 +16,7 @@ export const Header = () => {
       justifyContent="space-between"
     >
       <Link href="/">
-        <Heading size="lg" as="h1" className={styles.title}>
+        <Heading size="lg" as="h1" colorScheme='white'>
           Frontend Frameworks
         </Heading>
       </Link>

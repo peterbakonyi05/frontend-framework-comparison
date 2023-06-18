@@ -1,8 +1,8 @@
 import type { Post as PostModel } from '@tbcc/models';
 import Link from 'next/link';
 
-import styles from './post.module.css';
 import { dateUtil } from '../lib/date.util';
+import { Card, Heading, Text } from '@chakra-ui/react';
 
 export interface PostProps {
   post: PostModel;
@@ -10,13 +10,15 @@ export interface PostProps {
 
 export const Post: React.FC<PostProps> = ({ post }) => {
   return (
-    <div className={styles.post}>
+    <Card as="article" p={6} width="full">
       <Link href={`/posts/${encodeURIComponent(post.id)}`}>
-        <h2 className={styles.title}>{post.title}</h2>
+        <Heading as={'h3'} size="md" mb={3}>
+          {post.title}
+        </Heading>
       </Link>
-      <p className={styles.createdAt}>
+      <Text color="grey.500" size="xs" as="div">
         Created at: {dateUtil.convertIsoStringToDisplay(post.createdAt)}
-      </p>
-    </div>
+      </Text>
+    </Card>
   );
 };

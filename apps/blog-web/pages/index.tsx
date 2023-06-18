@@ -2,8 +2,8 @@ import type { Post as PostModel } from '@tbcc/models';
 import { apiClient } from '../lib/api-client';
 import { Post } from '../components/post';
 
-import styles from './index.module.css';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
+import { Container, Heading, VStack } from '@chakra-ui/react';
 
 export interface IndexPageProps {
   posts: PostModel[];
@@ -19,11 +19,14 @@ export const getServerSideProps: GetServerSideProps<IndexPageProps> = async (
 
 const HomePage: React.FC<IndexPageProps> = ({ posts }) => {
   return (
-    <div className={styles.page}>
-      {posts.map((post) => (
-        <Post post={post} key={post.id} />
-      ))}
-    </div>
+    <Container maxW="container.xl">
+      <Heading as="h1" my={6}>Recents posts</Heading>
+      <VStack p={4} spacing={{ base: 4, md: 6 }} width="full">
+        {posts.map((post) => (
+          <Post post={post} key={post.id} />
+        ))}
+      </VStack>
+    </Container>
   );
 };
 
