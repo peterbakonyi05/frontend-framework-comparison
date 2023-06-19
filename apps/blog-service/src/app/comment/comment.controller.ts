@@ -8,7 +8,7 @@ import {
   Param,
   UseGuards,
 } from '@nestjs/common';
-import type { Comment } from '@tbcc/models';
+import type { Comment, CommentCountByPostIdResponse } from '@tbcc/models';
 import { CommentService } from './comment.service';
 import { CreateCommentDTO } from './comment.model';
 import { AuthGuard } from '../auth/auth.guard';
@@ -17,6 +17,11 @@ import { JWTUser } from '../auth/auth.model';
 @Controller('comments')
 export class CommentController {
   constructor(private readonly commentService: CommentService) {}
+
+  @Get('count-by-post-id')
+  getNumberOfCommentsByPostId(): Promise<CommentCountByPostIdResponse> {
+    return this.commentService.getNumberOfCommentsByPostId();
+  }
 
   @Get(':postId')
   getAllCommentsByPostId(@Param('postId') postId: string): Promise<Comment[]> {

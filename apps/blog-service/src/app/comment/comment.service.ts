@@ -3,7 +3,7 @@ import {
   NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
-import type { Comment } from '@tbcc/models';
+import type { Comment, CommentCountByPostIdResponse } from '@tbcc/models';
 import { COMMENTS } from './comment.mock';
 import { UserService } from '../user/user.service';
 import { PostService } from '../post/post.service';
@@ -70,6 +70,17 @@ export class CommentService {
     comment.content = content;
     comment.updatedAt = this.getDateISO();
     return comment;
+  }
+
+  async getNumberOfCommentsByPostId(): Promise<CommentCountByPostIdResponse> {
+    // in a real app with more data this should get a list of post ids as input and query the DB for the given posts only
+    return this.comments.reduce((result, comment) => {
+      if (typeof result[comment.postId] === 'undefined') {
+        result[comment.postId] = 0;
+      }
+      result[comment.postId]++;
+      return result;
+    }, {} as CommentCountByPostIdResponse);
   }
 
   private getNextId() {

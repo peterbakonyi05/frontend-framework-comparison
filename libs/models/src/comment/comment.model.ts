@@ -12,3 +12,5 @@ export interface CreateCommentRequest {
   postId: number;
   content: string;
 }
+
+export type CommentCountByPostIdResponse = Record<number, number>;
