@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import type { Post } from '@tbcc/models';
+import type { Post, PostItem } from '@tbcc/models';
 
 import { POSTS } from './post.mock';
 
@@ -7,8 +7,8 @@ import { POSTS } from './post.mock';
 export class PostService {
   private posts: Post[] = POSTS;
 
-  async getAllPosts(): Promise<Post[]> {
-    return this.posts;
+  async getAllPosts(): Promise<PostItem[]> {
+    return this.posts.map(({ content, ...rest }) => rest);
   }
 
   async getPostById(id: number): Promise<Post | undefined> {

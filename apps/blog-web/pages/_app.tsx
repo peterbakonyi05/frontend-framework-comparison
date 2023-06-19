@@ -5,7 +5,6 @@ import chakraTheme from '@chakra-ui/theme';
 import Head from 'next/head';
 
 import './global.css';
-import styles from './app.module.css';
 
 import { Footer } from '../components/footer';
 import { Header } from '../components/header';

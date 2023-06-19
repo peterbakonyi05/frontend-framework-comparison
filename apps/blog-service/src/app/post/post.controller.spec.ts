@@ -15,9 +15,9 @@ describe('PostController', () => {
   });
 
   describe('getAllPosts', () => {
-    it('should return all the posts', async () => {
+    it('should return all the posts without content', async () => {
       const result = await controller.getAllPosts();
-      expect(result).toEqual(POSTS);
+      expect(result).toEqual(POSTS.map(({ content, ...rest }) => rest));
     });
   });
 

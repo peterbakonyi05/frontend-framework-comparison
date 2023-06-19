@@ -5,3 +5,5 @@ export interface Post {
   createdAt: string;
   userId: number;
 }
+
+export type PostItem = Omit<Post, 'content'>;
