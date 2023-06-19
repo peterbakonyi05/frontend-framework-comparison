@@ -73,6 +73,12 @@ npm run e2e # run headless once
 npm run start:e2e # run in watch mode for development
 ```
 
+## Running prod build
+
+```sh
+npm run build
+```
+
 # Original content of this README file
 
 ## Notes

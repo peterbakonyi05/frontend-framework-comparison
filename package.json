@@ -7,6 +7,7 @@
     "start:blog-web": "nx run blog-web:serve",
     "start:e2e": "nx run blog-web-e2e:e2e:dev --watch",
     "test": "nx run-many --target=test",
+    "build": "nx run-many --target=build",
     "lint": "nx run-many --target=lint",
     "e2e": "nx run blog-web-e2e:e2e"
   },
