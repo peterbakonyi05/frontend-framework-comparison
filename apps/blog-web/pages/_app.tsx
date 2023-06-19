@@ -30,6 +30,7 @@ const {
   Input,
   Textarea,
   List,
+  Skeleton,
 } = chakraTheme.components;
 const theme = extendBaseTheme({
   components: {
@@ -45,6 +46,7 @@ const theme = extendBaseTheme({
     Input,
     Textarea,
     List,
+    Skeleton,
   },
 });
 

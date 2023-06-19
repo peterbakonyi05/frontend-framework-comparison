@@ -5,7 +5,10 @@
   "scripts": {
     "start:blog-service": "nx run blog-service:serve",
     "start:blog-web": "nx run blog-web:serve",
-    "test": "nx run-many --target=test"
+    "start:e2e": "nx run blog-web-e2e:e2e:dev --watch",
+    "test": "nx run-many --target=test",
+    "lint": "nx run-many --target=lint",
+    "e2e": "nx run blog-web-e2e:e2e"
   },
   "private": true,
   "dependencies": {

@@ -1,7 +1,8 @@
-import { Button, Textarea, VStack, useToast } from '@chakra-ui/react';
+import { Button, Skeleton, Textarea, VStack, useToast } from '@chakra-ui/react';
 import React, { useCallback, useState } from 'react';
 import { useAuth } from '../lib/auth/auth.hook';
 import { useCreateCommentMutation } from '../lib/comment/comment.mutation';
+import { LoginButton } from './login-button';
 
 export interface CreateCommentProps {
   postId: number;
@@ -12,7 +13,7 @@ export const CreateComment: React.FC<CreateCommentProps> = ({
   postId,
   onSuccess,
 }) => {
-  const { user } = useAuth();
+  const { isLoading: isAuthLoading, user } = useAuth();
   const [content, setContent] = useState('');
   const toast = useToast();
   const { mutateAsync: createComment, isLoading } = useCreateCommentMutation();
@@ -38,8 +39,12 @@ export const CreateComment: React.FC<CreateCommentProps> = ({
     }
   }, [postId, createComment, content, toast, onSuccess]);
 
+  if (isAuthLoading) {
+    return <Skeleton width="full" height="2rem" />;
+  }
+
   if (!user) {
-    return null;
+    return <LoginButton text='Login to add comment...' />;
   }
 
   return (

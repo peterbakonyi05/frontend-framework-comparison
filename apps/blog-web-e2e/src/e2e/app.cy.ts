@@ -1,13 +1,19 @@
-import { getGreeting } from '../support/app.po';
-
+// at least the happy path of the main functionality should be covered in a real application
 describe('blog-web', () => {
   beforeEach(() => cy.visit('/'));
 
-  it('should display welcome message', () => {
-    // Custom command example, see `../support/commands.ts` file
-    cy.login('my-email@something.com', 'myPassword');
+  it('should display 3 posts', () => {
+    cy.contains('Recents posts');
+    cy.get('article').should('have.length', 3);
+  });
 
-    // Function helper example, see `../support/app.po.ts` file
-    getGreeting().contains('Welcome blog-web');
+  it('clicking on a post should redirect to the post detail page', () => {
+    cy.get('article')
+      .eq(0)
+      .find('a') // Find the link elements within the first article
+      .first()
+      .click();
+
+      cy.url().should('contain', '/posts/1')
   });
 });

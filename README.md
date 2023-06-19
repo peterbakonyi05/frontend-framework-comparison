@@ -8,14 +8,26 @@ Created by [Peter Bakonyi](https://github.com/peterbakonyi05)
 
 ## Tech stack
 
-- NX monorepo
+- [NX](https://nx.dev/) monorepo for tooling
 - Service: [NestJS](https://nestjs.com/) application
+  - service and controller layer is implemented with basic unit tests
+  - no persistence layer ([Prisma](https://www.prisma.io/) or something similar could be used)
+  - I provided hard-coded mock data
+  - features
+    - simple authentication using JWT (login / logout / getting profile)
+    - fetching posts
+    - fetching comments
+    - creating and updating comments when user is logged in (has valid JWT)
+  - I added basic validation but could be refined
+  - I did not add logging, it should be done in a real application for observability, monitoring and alerting
 - Client: [Next.js](https://nextjs.org/) application
-  - TypeScript
-  - UI library: chakra-ui
-  - Data fetching: react-query
-  - Unit testing: Jest
-- E2E tests: playwright
+  - Next.js application using page router
+  - UI library: [chakra-ui](https://chakra-ui.com/) with default theming
+  - Data fetching: combination of server-side rendering and [react-query](https://tanstack.com/query/v3/docs/react/overview) for data that changes (user, comments)
+  - Unit testing examples with Jest
+    - simple snapshot testing for [footer](./apps/blog-web/components/footer.spec.tsx)
+    - bit more complex testing with Testing Library and MSW for [comment creation](./apps/blog-web/components/create-comment.spec.tsx)
+- E2E tests: I created a very simple Cypress example test, normally at least the happy path of all functionality should be covered with E2E tests
 
 ## Getting started
 
@@ -25,30 +37,37 @@ Created by [Peter Bakonyi](https://github.com/peterbakonyi05)
 ```sh
 npm install # install dependencies
 npm run start:blog-service # start blog server
+npm run start:blog-web # start blog client
+
 ```
 
-Example request to login:
+Then open http://localhost:4200 to view the home page
+
+You can login and then comment using mock user credentials:
+
+- email: robert.reactfan@gmail.com, pw: react
+- email: adam.angularadvocate@gmail.com, pw: angular
+- email: victoria.vuesupporter@gmail.com, pw: vue
+
+## Running unit tests
 
 ```sh
-curl -X POST -H "Content-Type: application/json" -d '{"email":"robert.reactfan@gmail.com","password":"react"}' http://localhost:3000/api/auth/login
+npm test # runs unit test for client and server
 ```
 
-Create comment:
+## Running E2E tests
+
+I just added a very simple e2e test to load the page and navigate to a post.
+
+Normally the happy path of the main functionality should be covered in a real application.
 
 ```sh
-curl -X POST -H "Content-Type: application/json" -d '{"content":"Hello", "postId": 1}' http://localhost:3000/api/comments
+npm run start:blog-service # start blog server
+npm run e2e # run headless once
+npm run start:e2e # run in watch mode for development
 ```
 
-Example request to get profile info:
-
-```sh
- curl http://localhost:3000/api/auth/profile -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoicm9iZXJ0LnJlYWN0ZmFuQGdtYWlsLmNvbSIsImlhdCI6MTY4Njg1NTIwOSwiZXhwIjoxNjg2ODU4ODA5fQ.ptuJM21aVuuvvyrRil6vpGlwbs250CrttJoNnP-Zprg"
-```
-
-## TODOs for blog service
-
-- testing
-- logging
+# Original content of this README file
 
 ## Notes
 
