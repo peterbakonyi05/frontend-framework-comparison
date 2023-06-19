@@ -1,10 +1,16 @@
 import React from 'react';
-import styles from './footer.module.css';
+import { Box } from '@chakra-ui/react';
 
 export const Footer = () => {
   return (
-    <footer className={styles.footer}>
+    <Box
+      as="footer"
+      p={4}
+      backgroundColor="gray.900"
+      color="white"
+      textAlign="center"
+    >
       &copy; {new Date().getFullYear()} - Simple blog about frontend frameworks
-    </footer>
+    </Box>
   );
 };

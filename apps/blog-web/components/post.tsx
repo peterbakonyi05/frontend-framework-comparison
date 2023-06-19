@@ -12,11 +12,11 @@ export const Post: React.FC<PostProps> = ({ post }) => {
   return (
     <Card as="article" p={6} width="full">
       <Link href={`/posts/${encodeURIComponent(post.id)}`}>
-        <Heading as={'h3'} size="md" mb={3}>
+        <Heading as={'h3'} fontSize="md" mb={3}>
           {post.title}
         </Heading>
       </Link>
-      <Text color="grey.500" size="xs" as="div">
+      <Text color="gray.500" fontSize="xs" as="div">
         Created at: {dateUtil.convertIsoStringToDisplay(post.createdAt)}
       </Text>
     </Card>

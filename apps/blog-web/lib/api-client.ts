@@ -1,3 +1,5 @@
+import fetch from 'cross-fetch';
+
 const API_BASE_URL = process.env.NX_BLOG_API_BASE_URL;
 
 const getUrl = (path: string): string =>
@@ -6,7 +8,8 @@ const getUrl = (path: string): string =>
 export const apiClient = {
   async get(path: string): Promise<Response> {
     const url = getUrl(path);
-    return await fetch(url);
+    const response = await fetch(url);
+    return response.ok ? response : Promise.reject(response);
   },
 
   async getData<T>(path: string): Promise<T> {
@@ -22,6 +25,6 @@ export const apiClient = {
       },
       body: typeof body !== 'undefined' ? JSON.stringify(body) : undefined,
     });
-    return response;
+    return response.ok ? response : Promise.reject(response);
   },
 };

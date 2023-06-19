@@ -1,5 +1,5 @@
 import { AppProps } from 'next/app';
-import { ChakraBaseProvider, extendBaseTheme } from '@chakra-ui/react';
+import { Box, ChakraBaseProvider, extendBaseTheme } from '@chakra-ui/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import chakraTheme from '@chakra-ui/theme';
 import Head from 'next/head';
@@ -29,6 +29,7 @@ const {
   FormError,
   Input,
   Textarea,
+  List,
 } = chakraTheme.components;
 const theme = extendBaseTheme({
   components: {
@@ -43,6 +44,7 @@ const theme = extendBaseTheme({
     FormError,
     Input,
     Textarea,
+    List,
   },
 });
 
@@ -55,11 +57,11 @@ const CustomApp: React.FC<AppProps> = ({ Component, pageProps }) => {
             <title>{METADATA.title}</title>
             <meta name="description" content={METADATA.description} />
           </Head>
-          <div className={styles.root}>
+          <Box display="flex" flexDir="column" minHeight="100vh">
             <Header />
-            <div className={styles.content}>{<Component {...pageProps} />}</div>
+            <Box flexGrow={1}>{<Component {...pageProps} />}</Box>
             <Footer />
-          </div>
+          </Box>
         </AuthProvider>
       </ChakraBaseProvider>
     </QueryClientProvider>

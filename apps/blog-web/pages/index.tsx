@@ -19,7 +19,7 @@ export const getServerSideProps: GetServerSideProps<IndexPageProps> = async (
 
 const HomePage: React.FC<IndexPageProps> = ({ posts }) => {
   return (
-    <Container maxW="container.xl">
+    <Container maxW="container.lg">
       <Heading as="h1" my={6}>Recents posts</Heading>
       <VStack p={4} spacing={{ base: 4, md: 6 }} width="full">
         {posts.map((post) => (

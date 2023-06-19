@@ -1,14 +1,38 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { Response } from 'express';
 import { AuthController } from './auth.controller';
-import { AuthModule } from './auth.module';
 import { testingUtil } from '../testing/testing.util';
+import { AUTH_COOKIE_NAME } from './auth.constant';
+import { JwtService } from '@nestjs/jwt';
+import { UserModule } from '../user/user.module';
+import { AuthService } from './auth.service';
+
+const MOCK_ACCESS_TOKEN = 'access_token_value';
+
+const createMockResponse = () => {
+  const response = {} as unknown as Response;
+  response.status = jest.fn(() => response);
+  response.cookie = jest.fn(() => response);
+  response.clearCookie = jest.fn(() => response);
+  response.send = jest.fn();
+  return response;
+};
 
 describe('AuthController', () => {
   let controller: AuthController;
+  let mockJwtService;
 
   beforeEach(async () => {
+    mockJwtService = {
+      signAsync: jest.fn(() => Promise.resolve(MOCK_ACCESS_TOKEN)),
+    };
     const module: TestingModule = await Test.createTestingModule({
-      imports: [AuthModule],
+      imports: [UserModule],
+      providers: [
+        AuthService,
+        { provide: JwtService, useValue: mockJwtService },
+      ],
+      controllers: [AuthController],
     }).compile();
 
     controller = module.get<AuthController>(AuthController);
@@ -20,8 +44,24 @@ describe('AuthController', () => {
         email: 'adam.angularadvocate@gmail.com',
         password: 'angular',
       };
-      const result = await controller.login(credentials);
-      expect(typeof result.access_token).toBe('string');
+      const mockResponse = createMockResponse();
+      await controller.login(credentials, mockResponse);
+
+      expect(mockResponse.cookie).toHaveBeenCalledWith(
+        AUTH_COOKIE_NAME,
+        MOCK_ACCESS_TOKEN,
+        {
+          httpOnly: true,
+          secure: true,
+          maxAge: 60 * 60 * 1000, // 1 hour in milliseconds
+        }
+      );
+      expect(mockResponse.status).toHaveBeenCalledWith(201);
+      expect(mockResponse.send).toHaveBeenCalled();
+      expect(mockJwtService.signAsync).toHaveBeenCalledWith({
+        sub: 2,
+        email: credentials.email,
+      });
     });
 
     it('should throw an error when provided with invalid credentials', async () => {
@@ -29,9 +69,21 @@ describe('AuthController', () => {
         email: 'testuser',
         password: 'wrongpassword',
       };
-      await expect(controller.login(credentials)).rejects.toThrowError(
-        'Unauthorized'
-      );
+      const mockResponse = createMockResponse();
+      await expect(
+        controller.login(credentials, mockResponse)
+      ).rejects.toThrowError('Unauthorized');
+    });
+  });
+
+  describe('logout', () => {
+    it('should remove cookie', async () => {
+      const mockResponse = createMockResponse();
+      await controller.logout(mockResponse);
+
+      expect(mockResponse.clearCookie).toHaveBeenCalledWith(AUTH_COOKIE_NAME);
+      expect(mockResponse.status).toHaveBeenCalledWith(200);
+      expect(mockResponse.send).toHaveBeenCalled();
     });
   });
 

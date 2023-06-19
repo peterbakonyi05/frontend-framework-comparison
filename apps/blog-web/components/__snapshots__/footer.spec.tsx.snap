@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer should render correctly 1`] = `
+<footer
+  class="css-h89chm"
+>
+  © 
+  2023
+   - Simple blog about frontend frameworks
+</footer>
+`;

@@ -43,7 +43,7 @@ export class AuthController {
 
   @HttpCode(HttpStatus.OK)
   @Post('logout')
-  deleteCookie(@Res() res: Response) {
+  logout(@Res() res: Response) {
     res.clearCookie(AUTH_COOKIE_NAME).status(200).send();
   }
 
