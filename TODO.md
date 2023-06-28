@@ -1,0 +1,4 @@
+- implement angular client
+- implement svelte client
+- implement client with nextjs server components
+- 
