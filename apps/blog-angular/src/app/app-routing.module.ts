@@ -7,7 +7,7 @@ import { NotFoundPageComponent } from './not-found-page/not-found-page.component
 const routes: Routes = [
   {
     component: BlogPostPageComponent,
-    path: 'blog-post',
+    path: 'posts/:id',
   },
   {
     component: HomePageComponent,
